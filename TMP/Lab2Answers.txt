@@ -1,0 +1,160 @@
+                CSC 501 - Operating Systems Principles
+                      PA2 Additional Questions
+                      
+                  Name: Aravindhan Dhanasekaran
+                       Unity ID: adhanas
+
+Note: Best when viewed using fixed-width fonts (Consolas or Courier New).
+
+================================================================================
+1. The priority inversion problem could cause that a higher-priority process 
+   needs to wait for the completion of a lower-priority process.
+   1.1 Priority inheritance is one approach to address this issue. Please give 
+       another approach and briefly describe its idea.
+       
+       a.) Priority ceiling is another approach through which we can overcome
+       priority inheritance problem. In priority ceiling approach, each
+       resource is assigned a priority (usually higher than any task's priority)
+       and whenver a process requests the resource, the resource is granted to
+       the process (if available) and the process's priority is set to the 
+       resource's prioirty. Thus, this task would now, literally have the 
+       highest priority.
+       Reference: http://en.wikipedia.org/wiki/Priority_ceiling_protocol
+       
+       b.) Another approach would be to suspend the lower priority process which
+       is holding resource whenver a higher priority process requests for the 
+       same resource. The lower priority process can be resumed again once the 
+       higher priority process releases the lock. To achieve this, we need to 
+       maintaim the state of the lower priority process when it got suspended. 
+       This approach might have some undesirable effects too.
+       
+            
+   1.2 Design a test case to show that your approach can address the priority 
+       inversion problem. You should compare the results that derived from the 
+       original XINU implementation (use semaphore) and that derived from your 
+       implementation (use readers/writer locks). Put your results in 
+       Lab2Answers.txt and your test case program (name it task1.c) in both 
+       ./sys and ./TMP
+       
+       I used three processes, one semaphore (for original Xinu implementation) 
+       and one WRITE lock (for my PA2 implementation). The three processes are 
+       procA, procB and procC with priorities 20, 25 and 30 respectively. All 
+       three processes will be resumed one after another in the order of A, B 
+       and C. In both cases, procA would lock the resource, do some busy 
+       computation and release the resource. procC shares the same code as that 
+       of procA and procB is same as procA except that they don't use the shared
+       resource. I also print the priority of the currently running proceess and
+       the time it was waiting to acquire the resource at the end of process
+       completion. Please refer to "task1.c" file in sys/ and TMP/ direcotry for 
+       the source code.
+       
+       Xinu implementation: The original Xinu implementation doesn't have any
+       mechanisms to overcome priority inversion problems. Thus, in our example,
+        * procA (prio 20) would acquire the resource and procC (prio 30) will 
+          wait until procB (prio 25) finishes, so that procA can continue. 
+        * Finally, when procA finishes, it releases the resource post which 
+          procC starts running. Thus, procC would wait for more time (procA's + 
+          procB's time).
+        
+       Output of task1.c for Xinu implemenation (with // style comments) 
+       -----------------------------------------------------------------
+       Testing Xinu semaphores..
+       sem created
+       procA start..
+       procA to acquire sem     
+       procA acquired sem
+       procB start..            //procA interrupted by higher priority procB
+       procC start..            //procB interrupted by higher priority procC
+       procC to acquire sem
+       procB prio 25            //control falls back to procB as procC 
+                                    goes to wait state
+       procB end..              //procB is over.. procA takes over.. procC is 
+                                    in wait state
+       procA prio 20            //procA's prio is same
+       procA to release sem     //procA releases the sem
+       procC acquired sem       //procC is woken up
+       procA released sem
+       procA spent 0 waiting on sem
+       procA end..
+       procC prio 30
+       procC to release sem
+       procC released sem
+       procC spent 39855 waiting on sem     //time spent by higher priority 
+                                                procC waiting for the sem
+       procC end..
+       sem deleted
+       
+       My PA2 implementation: The PA2 implementation takes care of the above
+       said problem using priority inheritence. Thus, 
+        * When procC waits on the resource held by procA, procA's priority is 
+          set to as that of procC. 
+        * This gives procA a chance to run before procB (in Xinu, procB would've 
+          run in this case), release the resource. 
+        * Now, procC would take the resource and finishes. Finally, procB would 
+          run. It's clear that procC would wait for a less time than in Xinu's 
+          case. This is evident from the results.
+          
+       Output of task1.c for PA2 implemenation (with // style comments) 
+       ----------------------------------------------------------------
+       Testing PA2 locks..
+       lock created
+       procA start..
+       procA to acquire lock
+       procA acquired lock
+       procB start..            //procA interrupted by higher priority procB
+       procC start..            //procB interrupted by higher priority procC
+       procC to acquire lock
+       procA prio 30            //control falls back to procA whose prio is set 
+                                    to that of procC (contrast this with Xinu 
+                                    where control goes to procB)
+       procA to release lock    //procA releases the lock
+       procC acquired lock      
+       procC prio 30
+       procC to release lock
+       procC released lock
+       procC spent 20040 waiting on lock    //time spent by higher priority  
+                                                procC waiting for the lock  
+                                                (contrast this with Xinu where
+                                                it waited for more time)
+       procC end..
+       procA released lock
+       procA spent 1 waiting on lock
+       lock deleted
+       procA end..
+       procB prio 25            //procB's prio is unchanged as it's not 
+                                    competing for the resource
+       procB end..
+       
+================================================================================
+2. Synchronization is a quite complex issue in operating systems. To show your 
+   understanding about process synchronization, you are asked to point out a 
+   reader/writer synchronization issue in this pesudo-code: task2_sync_issue.c. 
+   Multiple reader threads can execute this code concurrently by calling 
+   do_update. All the variables starting with global_ are global variables. You 
+   are asked to describe the potential issue caused by the incorrect 
+   synchronization and point out at least one possible thread interleaving that 
+   would trigger the problem. Put your answer in Lab2Answers.txt mentioned 
+   above.
+   
+   In the pseudocode given in task2_sync_issue.c, the global data, global_buf 
+   can be modified by multiple reader threads simultaneously. Due to thread
+   interleaving, this may result in data corruption.
+   
+   Once such example could be: 
+    * Lets say we have two reader threads, T1 & T2 and both of them have acquired
+      READ locks. 
+    * Now, T1 is scheduled to run and it runs all the way till the third to the \
+      last line of buffer_add(). i.e.., it runs upto the statement where 
+      global_buf's len is updated. At this point, lets say T2 is scheduled 
+      to run. T2 will be allowed as we can have multiple readers if there are
+      no waiting writers.
+    * Assume T2 passes all validation checks and comes to buffer_add(). Now,
+      the value of len in buf_len is stale as the buffer has been updated by T1,
+      but the len is not updated. So, T2 would overwrite T1's data in buf.
+      
+    The solution is to provide exclusive write access to a process modifying
+    global_buf. This can be done by acquiring a WRITE lock just to update the 
+    global_buf contents.
+
+================================================================================
+

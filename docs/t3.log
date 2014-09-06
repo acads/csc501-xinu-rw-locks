@@ -1,0 +1,1425 @@
+Xinu Version (CSC501 1-2009 base) #1 (adhanas@vcln1-3.hpc) Sun Feb 16 10:17:11 EST 2014
+
+16777216 bytes real mem
+95547 bytes Xinu code
+clock enabled
+DBG$ 49 main> start
+
+
+Hello World, Xinu lives
+
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> lid 49 state changed from Uninitialized to Free 49
+DBG$ 49 l_new_lid> returning lock 49
+DBG$ 49 l_new_lid> end
+DBG$ 49 lcreate> new lock 49 created
+DBG$ 49 lcreate> setting the logmap bit for lid 49 after successful lock creation...
+DBG$ 49 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Log
+DBG$ 49 lcreate> end
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> lid 48 state changed from Uninitialized to Free 49
+DBG$ 49 l_new_lid> returning lock 48
+DBG$ 49 l_new_lid> end
+DBG$ 49 lcreate> new lock 48 created
+DBG$ 49 lcreate> setting the logmap bit for lid 48 after successful lock creation...
+DBG$ 49 l_pidmap_oper> lid 48 setting index 6, bit 1 of type Log
+DBG$ 49 lcreate> end
+DBG$ 48 procA> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 48 lock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 49 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 lock> lid 49 is free, pid 48 has read access now
+DBG$ 48 lock> printing lid 49 details...
+
+******** Lock Details Start ********
+LID                       : 49
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 0
+Waiting readers on LID 49 : 
+Waiting writers on LID 49 : 
+Next PID                  : 0
+Next queue                : Plid
+******** Lock Details End *********
+
+DBG$ 48 lock> lock inc'd for pid 48, total # of locks 1
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 0 of type Release
+DBG$ 48 lock> setting the logmap bit for lid 49 after successful lock...
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 0 of type Log
+DBG$ 48 lock> pid 48, setting the plidmap bit for lid 49 after successful lock...
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Plid
+DBG$ 48 lock> end
+
+	procA: acquired lock l1
+
+
+	procA: priority 10 after lock
+	procB: priority 20 after lock
+	procC: priority 30 after lock
+DBG$ 47 procB> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 47 lock> start
+DBG$ 47 l_is_lid_stale_for_pid> start
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Delete: unset
+DBG$ 47 l_is_lid_stale_for_pid> lid 48 is not stale for pid 47
+DBG$ 47 l_is_lid_stale_for_pid> end
+DBG$ 47 lock> lid 48 is free, pid 47 has read access now
+DBG$ 47 lock> printing lid 48 details...
+
+******** Lock Details Start ********
+LID                       : 48
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 0
+Waiting readers on LID 48 : 
+Waiting writers on LID 48 : 
+Next PID                  : 0
+Next queue                : Plid
+******** Lock Details End *********
+
+DBG$ 47 lock> lock inc'd for pid 47, total # of locks 1
+DBG$ 47 l_pidmap_oper> lid 48 setting index 5, bit 7 of type Release
+DBG$ 47 lock> setting the logmap bit for lid 48 after successful lock...
+DBG$ 47 l_pidmap_oper> lid 48 setting index 5, bit 7 of type Log
+DBG$ 47 lock> pid 47, setting the plidmap bit for lid 48 after successful lock...
+DBG$ 47 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Plid
+DBG$ 47 lock> end
+
+	procB: acquired read lock l2
+
+
+	procA: priority 10 after lock
+	procB: priority 20 after lock
+	procC: priority 30 after lock
+
+
+DBG$ 47 procB> procB going to sleep
+
+
+DBG$ 48 lock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 48 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_inherit_prio_if_reqd> start
+DBG$ 48 l_inherit_prio_if_reqd> lid 48 hprio 0 is less than currpid 48 prio 10
+DBG$ 48 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 10
+DBG$ 48 l_pidmap_oper> bad pid 0
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 48 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 48 l_inherit_prio_if_reqd> pid 47 pprio 20
+DBG$ 48 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 10
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 48 l_inherit_prio_if_reqd> end
+DBG$ 48 lock> lid 48 is in read state, writer pid 48 is being put into write queue
+DBG$ 48 l_recal_next> start
+DBG$ 48 l_recal_next> writer 48 won
+DBG$ 48 l_recal_next> end
+DBG$ 48 lock> printing lid 48 details...
+
+******** Lock Details Start ********
+LID                       : 48
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 1
+Waiting readers on LID 48 : 
+Waiting writers on LID 48 : 48, 
+Next PID                  : 48
+Next queue                : Write
+******** Lock Details End *********
+
+DBG$ 48 lock> pid 48 put into wait queue
+DBG$ 46 procC> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 46 l_handle_chprio> start
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hprio 10 is less than currpid 48 prio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 25
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 pprio 20
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio 20 < hprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio changed from 20 to 25
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> bad lid -1
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_handle_chprio> pid 48, plid 48, pi'd due to chprio()
+ DBG$ 46 l_handle_chprio> end
+DBG$ 46 lock> start
+DBG$ 46 l_is_lid_stale_for_pid> start
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Delete: unset
+DBG$ 46 l_is_lid_stale_for_pid> lid 49 is not stale for pid 46
+DBG$ 46 l_is_lid_stale_for_pid> end
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 49 hprio 0 is less than currpid 46 prio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49 hpid set to 46, hprio set to 30
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 48 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 48 pprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, hpid 46, hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, pid 48 prio 25 < hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, pid 48 prio changed from 25 to 30
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hprio 25 is less than currpid 48 prio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 30
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 pprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio 25 < hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio changed from 20 to 30
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> bad lid -1
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 49 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 lock> priority inherited!
+DBG$ 46 lock> lid 49 is in read state, writer pid 46 is being put into write queue
+DBG$ 46 l_recal_next> start
+DBG$ 46 l_recal_next> writer 46 won
+DBG$ 46 l_recal_next> end
+DBG$ 46 lock> printing lid 49 details...
+
+******** Lock Details Start ********
+LID                       : 49
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 1
+Waiting readers on LID 49 : 
+Waiting writers on LID 49 : 46, 
+Next PID                  : 46
+Next queue                : Write
+******** Lock Details End *********
+
+DBG$ 46 lock> pid 46 put into wait queue
+DBG$ 47 procB> procB back from sleep
+
+
+	procA: priority 30 before release
+	procB: priority 30 before release
+	procC: priority 30 before release
+
+
+DBG$ 47 releaseall> start
+
+
+
+DAN: releasing lid 48
+
+
+DBG$ 47 l_unlock> start
+DBG$ 47 l_is_lid_stale_for_pid> start
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Delete: unset
+DBG$ 47 l_is_lid_stale_for_pid> lid 48 is not stale for pid 47
+DBG$ 47 l_is_lid_stale_for_pid> end
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 47 l_unlock> pid 47 unlocked read lid 48
+DBG$ 47 l_get_next_writer> start
+DBG$ 47 l_get_next_writer> lid 47 state changed from Read to Write
+DBG$ 47 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Release
+DBG$ 47 l_get_next_writer> lid 48 next writer lock for pid 48
+DBG$ 47 l_recal_next> start
+DBG$ 47 l_recal_next> nwread = nwwrite = 0!
+DBG$ 47 l_recal_next> wait list is empty
+DBG$ 47 l_recal_next> end
+DBG$ 47 l_get_next_writer> end
+DBG$ 47 l_unlock> lock dec'd for pid 47, total # of locks 0
+DBG$ 47 l_unlock> end
+DBG$ 47 l_reset_prio> start
+DBG$ 47 l_reset_prio> pid 47 has released all its locks.. resetting its priority
+DBG$ 47 l_reset_prio> pid 47 prio changed from 30 to 20
+DBG$ 47 l_reset_prio> end
+DBG$ 47 releaseall> pid 47 prio resetted after releasing lid 48
+DBG$ 48 lock> setting the logmap bit for lid 48 after resched...
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Log
+DBG$ 48 lock> lock inc'd for pid 48, total # of locks 2
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Release
+DBG$ 48 lock> pid 48, setting the plidmap bit for lid 48 after resched...
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Plid
+
+	procA: acquired write lock l2
+DBG$ 48 procA> procA going to sleep
+DBG$ 47 releaseall> end
+
+	procB: released l2
+
+
+	procA: priority 30 after release
+	procB: priority 20 after release
+	procC: priority 30 after release
+
+
+
+
+			procB is dead
+
+DBG$ 47 procB> end
+DBG$ 47 l_handle_kill> start
+DBG$ 47 l_handle_kill> pid 47 doesn't have any locks
+DBG$ 47 l_handle_kill> end
+DBG$ 47 l_clear_pidmaps> start
+DBG$ 47 l_clear_pidmaps> end
+DBG$ 48 procA> procA back from sleep
+
+
+	procA: priority 30 before release
+	procB: priority -1 before release
+	procC: priority 30 before release
+
+
+DBG$ 48 releaseall> start
+
+
+
+DAN: releasing lid 48
+
+
+DBG$ 48 l_unlock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 48 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: set
+DBG$ 48 l_unlock> pid 48 unlocked write lid 48
+DBG$ 48 l_unlock> no more waiters for lid 48
+DBG$ 48 l_unlock> lid 48 state changed from Write to Free
+DBG$ 48 l_unlock> lock dec'd for pid 48, total # of locks 1
+DBG$ 48 l_unlock> end
+DBG$ 48 l_reset_prio> start
+DBG$ 48 l_pidmap_oper> lid 0 checking index 0, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 1 checking index 0, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 2 checking index 0, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 3 checking index 0, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 4 checking index 0, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 5 checking index 0, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 6 checking index 0, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 7 checking index 0, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 8 checking index 1, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 9 checking index 1, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 10 checking index 1, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 11 checking index 1, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 12 checking index 1, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 13 checking index 1, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 14 checking index 1, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 15 checking index 1, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 16 checking index 2, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 17 checking index 2, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 18 checking index 2, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 19 checking index 2, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 20 checking index 2, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 21 checking index 2, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 22 checking index 2, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 23 checking index 2, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 24 checking index 3, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 25 checking index 3, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 26 checking index 3, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 27 checking index 3, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 28 checking index 3, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 29 checking index 3, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 30 checking index 3, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 31 checking index 3, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 32 checking index 4, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 33 checking index 4, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 34 checking index 4, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 35 checking index 4, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 36 checking index 4, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 37 checking index 4, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 38 checking index 4, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 39 checking index 4, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 40 checking index 5, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 41 checking index 5, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 42 checking index 5, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 43 checking index 5, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 44 checking index 5, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 45 checking index 5, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 46 checking index 5, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 47 checking index 5, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 1 of type Plid: set
+DBG$ 48 l_reset_prio> pid 48, prio changed from 30 to 30
+DBG$ 48 l_reset_prio> end
+DBG$ 48 releaseall> pid 48 prio resetted after releasing lid 49
+
+
+
+DAN: releasing lid 49
+
+
+DBG$ 48 l_unlock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 49 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Release: set
+DBG$ 48 l_unlock> pid 48 unlocked read lid 49
+DBG$ 48 l_get_next_writer> start
+DBG$ 48 l_get_next_writer> lid 48 state changed from Read to Write
+DBG$ 48 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Release
+DBG$ 48 l_get_next_writer> lid 49 next writer lock for pid 46
+DBG$ 48 l_recal_next> start
+DBG$ 48 l_recal_next> nwread = nwwrite = 0!
+DBG$ 48 l_recal_next> wait list is empty
+DBG$ 48 l_recal_next> end
+DBG$ 48 l_get_next_writer> end
+DBG$ 48 l_unlock> lock dec'd for pid 48, total # of locks 0
+DBG$ 48 l_unlock> end
+DBG$ 48 l_reset_prio> start
+DBG$ 48 l_reset_prio> pid 48 has released all its locks.. resetting its priority
+DBG$ 48 l_reset_prio> pid 48 prio changed from 30 to 25
+DBG$ 48 l_reset_prio> end
+DBG$ 48 releaseall> pid 48 prio resetted after releasing lid 49
+DBG$ 46 lock> setting the logmap bit for lid 49 after resched...
+DBG$ 46 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Log
+DBG$ 46 lock> lock inc'd for pid 46, total # of locks 1
+DBG$ 46 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Release
+DBG$ 46 lock> pid 46, setting the plidmap bit for lid 49 after resched...
+DBG$ 46 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Plid
+
+	procC: acquired write lock l1
+
+
+	procA: priority 25 after lock
+	procB: priority -1 after lock
+	procC: priority 30 after lock
+
+
+DBG$ 46 procC> procC going to sleep
+DBG$ 48 releaseall> end
+
+	procA: released l1 & l2
+
+
+	procA: priority 25 after release
+	procB: priority -1 after release
+	procC: priority 30 after release
+
+
+
+
+			procA is dead
+
+DBG$ 48 procA> end
+DBG$ 48 l_handle_kill> start
+DBG$ 48 l_handle_kill> pid 48 doesn't have any locks
+DBG$ 48 l_handle_kill> end
+DBG$ 48 l_clear_pidmaps> start
+DBG$ 48 l_clear_pidmaps> end
+DBG$ 46 procC> procC back from sleep
+
+
+	procA: priority -1 before release
+	procB: priority -1 before release
+	procC: priority 30 before release
+
+
+DBG$ 46 releaseall> start
+
+
+
+DAN: releasing lid 49
+
+
+DBG$ 46 l_unlock> start
+DBG$ 46 l_is_lid_stale_for_pid> start
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Delete: unset
+DBG$ 46 l_is_lid_stale_for_pid> lid 49 is not stale for pid 46
+DBG$ 46 l_is_lid_stale_for_pid> end
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Release: set
+DBG$ 46 l_unlock> pid 46 unlocked write lid 49
+DBG$ 46 l_unlock> no more waiters for lid 49
+DBG$ 46 l_unlock> lid 49 state changed from Write to Free
+DBG$ 46 l_unlock> lock dec'd for pid 46, total # of locks 0
+DBG$ 46 l_unlock> end
+DBG$ 46 l_reset_prio> start
+DBG$ 46 l_reset_prio> pid 46 is currently using it's original priority
+DBG$ 46 l_reset_prio> end
+DBG$ 46 releaseall> end
+
+	procC: released l1
+
+
+	procA: priority -1 after release
+	procB: priority -1 after release
+	procC: priority 30 after release
+
+
+
+
+			procC is dead
+
+DBG$ 46 procC> end
+DBG$ 46 l_handle_kill> start
+DBG$ 46 l_handle_kill> pid 46 doesn't have any locks
+DBG$ 46 l_handle_kill> end
+DBG$ 46 l_clear_pidmaps> start
+DBG$ 46 l_clear_pidmaps> end
+main is dead
+
+
+All user processes have completed.
+
+DBG$ 49 l_handle_kill> start
+DBG$ 49 l_handle_kill> pid 49 doesn't have any locks
+DBG$ 49 l_handle_kill> end
+DBG$ 49 l_clear_pidmaps> start
+DBG$ 49 l_clear_pidmaps> end
+
+--------------------------------------------------------------------------------
+Hello World, Xinu lives
+
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> lid 49 state changed from Uninitialized to Free 49
+DBG$ 49 l_new_lid> returning lock 49
+DBG$ 49 l_new_lid> end
+DBG$ 49 lcreate> new lock 49 created
+DBG$ 49 lcreate> setting the logmap bit for lid 49 after successful lock creation...
+DBG$ 49 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Log
+DBG$ 49 lcreate> end
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> lid 48 state changed from Uninitialized to Free 49
+DBG$ 49 l_new_lid> returning lock 48
+DBG$ 49 l_new_lid> end
+DBG$ 49 lcreate> new lock 48 created
+DBG$ 49 lcreate> setting the logmap bit for lid 48 after successful lock creation...
+DBG$ 49 l_pidmap_oper> lid 48 setting index 6, bit 1 of type Log
+DBG$ 49 lcreate> end
+DBG$ 48 procA> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 48 lock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 49 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 lock> lid 49 is free, pid 48 has read access now
+DBG$ 48 lock> printing lid 49 details...
+
+******** Lock Details Start ********
+LID                       : 49
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 0
+Waiting readers on LID 49 : 
+Waiting writers on LID 49 : 
+Next PID                  : 0
+Next queue                : Plid
+HPid                      : 0
+HPrio                     : 0
+******** Lock Details End *********
+
+DBG$ 48 lock> lock inc'd for pid 48, total # of locks 1
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 0 of type Release
+DBG$ 48 lock> setting the logmap bit for lid 49 after successful lock...
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 0 of type Log
+DBG$ 48 lock> pid 48, setting the plidmap bit for lid 49 after successful lock...
+DBG$ 48 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Plid
+DBG$ 48 lock> end
+
+	procA: acquired lock l1
+
+
+	procA: priority 10 after lock
+DBG$ 47 procB> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 47 lock> start
+DBG$ 47 l_is_lid_stale_for_pid> start
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Delete: unset
+DBG$ 47 l_is_lid_stale_for_pid> lid 48 is not stale for pid 47
+DBG$ 47 l_is_lid_stale_for_pid> end
+DBG$ 47 lock> lid 48 is free, pid 47 has read access now
+DBG$ 47 lock> printing lid 48 details...
+
+******** Lock Details Start ********
+LID                       : 48
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 0
+Waiting readers on LID 48 : 
+Waiting writers on LID 48 : 
+Next PID                  : 0
+Next queue                : Plid
+HPid                      : 0
+HPrio                     : 0
+******** Lock Details End *********
+
+DBG$ 47 lock> lock inc'd for pid 47, total # of locks 1
+DBG$ 47 l_pidmap_oper> lid 48 setting index 5, bit 7 of type Release
+DBG$ 47 lock> setting the logmap bit for lid 48 after successful lock...
+DBG$ 47 l_pidmap_oper> lid 48 setting index 5, bit 7 of type Log
+DBG$ 47 lock> pid 47, setting the plidmap bit for lid 48 after successful lock...
+DBG$ 47 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Plid
+DBG$ 47 lock> end
+
+	procB: acquired read lock l2
+
+
+	procA: priority 10 after lock
+	procB: priority 20 after lock
+	procC: priority 30 after lock
+
+
+DBG$ 47 procB> procB going to sleep
+	procB: priority 20 after lock
+	procC: priority 30 after lock
+
+
+DBG$ 48 lock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 48 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_inherit_prio_if_reqd> start
+DBG$ 48 l_inherit_prio_if_reqd> lid 48 hprio 0 is less than currpid 48 prio 10
+DBG$ 48 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 10
+DBG$ 48 l_pidmap_oper> bad pid 0
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 48 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 48 l_inherit_prio_if_reqd> pid 47 pprio 20
+DBG$ 48 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 10
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 48 l_inherit_prio_if_reqd> end
+DBG$ 48 lock> lid 48 is in read state, writer pid 48 is being put into write queue
+DBG$ 48 l_recal_next> start
+DBG$ 48 l_recal_next> writer 48 won
+DBG$ 48 l_recal_next> end
+DBG$ 48 lock> printing lid 48 details...
+
+******** Lock Details Start ********
+LID                       : 48
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 1
+Waiting readers on LID 48 : 
+Waiting writers on LID 48 : 48, 
+Next PID                  : 48
+Next queue                : Write
+HPid                      : 48
+HPrio                     : 10
+******** Lock Details End *********
+
+DBG$ 48 lock> pid 48 put into wait queue
+DBG$ 46 procC> start
+
+
+	procA: priority 10 before lock
+	procB: priority 20 before lock
+	procC: priority 30 before lock
+
+
+DBG$ 46 l_handle_chprio> start
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hprio 10 is less than currpid 48 prio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 25
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 pprio 20
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio 20 < hprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio changed from 20 to 25
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> bad lid -1
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_handle_chprio> pid 48, plid 48, pi'd due to chprio()
+ DBG$ 46 l_handle_chprio> end
+DBG$ 46 lock> start
+DBG$ 46 l_is_lid_stale_for_pid> start
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Delete: unset
+DBG$ 46 l_is_lid_stale_for_pid> lid 49 is not stale for pid 46
+DBG$ 46 l_is_lid_stale_for_pid> end
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 49 hprio 0 is less than currpid 46 prio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49 hpid set to 46, hprio set to 30
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 48 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 48 pprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, hpid 46, hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, pid 48 prio 25 < hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 49, pid 48 prio changed from 25 to 30
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hprio 25 is less than currpid 48 prio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48 hpid set to 48, hprio set to 30
+DBG$ 46 l_pidmap_oper> bad pid 0
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 0, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 1, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 2, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 3, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 4, bit 7 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 1 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 2 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 3 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 4 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 5 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 6 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 set
+DBG$ 46 l_inherit_prio_if_reqd> pid 47 pprio 25
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, hpid 48, hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio 25 < hprio 30
+DBG$ 46 l_inherit_prio_if_reqd> lid 48, pid 47 prio changed from 20 to 30
+DBG$ 46 l_inherit_prio_if_reqd> start
+DBG$ 46 l_inherit_prio_if_reqd> bad lid -1
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: unset
+DBG$ 46 l_pidmap_oper> lid 48 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 l_pidmap_oper> lid 49 checking index 6, bit 1 of type Release: unset
+DBG$ 46 l_inherit_prio_if_reqd> end
+DBG$ 46 lock> priority inherited!
+DBG$ 46 lock> lid 49 is in read state, writer pid 46 is being put into write queue
+DBG$ 46 l_recal_next> start
+DBG$ 46 l_recal_next> writer 46 won
+DBG$ 46 l_recal_next> end
+DBG$ 46 lock> printing lid 49 details...
+
+******** Lock Details Start ********
+LID                       : 49
+Lock state                : Read
+# of active readers       : 1
+# of active writers       : 0
+# of waiting readers      : 0
+# of waiting writers      : 1
+Waiting readers on LID 49 : 
+Waiting writers on LID 49 : 46, 
+Next PID                  : 46
+Next queue                : Write
+HPid                      : 46
+HPrio                     : 30
+******** Lock Details End *********
+
+DBG$ 46 lock> pid 46 put into wait queue
+DBG$ 47 procB> procB back from sleep
+
+
+	procA: priority 30 before release
+	procB: priority 30 before release
+	procC: priority 30 before release
+
+
+DBG$ 47 releaseall> start
+
+
+
+DAN: releasing lid 48
+
+
+DBG$ 47 l_unlock> start
+DBG$ 47 l_is_lid_stale_for_pid> start
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Delete: unset
+DBG$ 47 l_is_lid_stale_for_pid> lid 48 is not stale for pid 47
+DBG$ 47 l_is_lid_stale_for_pid> end
+DBG$ 47 l_pidmap_oper> lid 48 checking index 5, bit 7 of type Release: set
+DBG$ 47 l_unlock> pid 47 unlocked read lid 48
+DBG$ 47 l_get_next_writer> start
+DBG$ 47 l_get_next_writer> lid 47 state changed from Read to Write
+DBG$ 47 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Release
+DBG$ 47 l_get_next_writer> lid 48 next writer lock for pid 48
+DBG$ 47 l_recal_next> start
+DBG$ 47 l_recal_next> nwread = nwwrite = 0!
+DBG$ 47 l_recal_next> wait list is empty
+DBG$ 47 l_recal_next> end
+DBG$ 47 l_get_next_writer> end
+DBG$ 47 l_unlock> lock dec'd for pid 47, total # of locks 0
+DBG$ 47 l_unlock> end
+DBG$ 47 l_reset_prio> start
+DBG$ 47 l_reset_prio> pid 47 has released all its locks.. resetting its priority
+DBG$ 47 l_reset_prio> pid 47 prio changed from 30 to 20
+DBG$ 47 l_reset_prio> end
+DBG$ 47 releaseall> pid 47 prio resetted after releasing lid 48
+DBG$ 48 lock> setting the logmap bit for lid 48 after resched...
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Log
+DBG$ 48 lock> lock inc'd for pid 48, total # of locks 2
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Release
+DBG$ 48 lock> pid 48, setting the plidmap bit for lid 48 after resched...
+DBG$ 48 l_pidmap_oper> lid 48 setting index 6, bit 0 of type Plid
+
+	procA: acquired write lock l2
+DBG$ 48 procA> procA going to sleep
+DBG$ 47 releaseall> end
+
+	procB: released l2
+
+
+	procA: priority 30 after release
+	procB: priority 20 after release
+	procC: priority 30 after release
+
+
+
+
+			procB is dead
+
+DBG$ 47 procB> end
+DBG$ 48 l_handle_kill> start
+DBG$ 48 l_pidmap_oper> lid 0 checking index 0, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 1 checking index 0, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 2 checking index 0, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 3 checking index 0, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 4 checking index 0, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 5 checking index 0, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 6 checking index 0, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 7 checking index 0, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 8 checking index 1, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 9 checking index 1, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 10 checking index 1, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 11 checking index 1, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 12 checking index 1, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 13 checking index 1, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 14 checking index 1, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 15 checking index 1, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 16 checking index 2, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 17 checking index 2, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 18 checking index 2, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 19 checking index 2, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 20 checking index 2, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 21 checking index 2, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 22 checking index 2, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 23 checking index 2, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 24 checking index 3, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 25 checking index 3, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 26 checking index 3, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 27 checking index 3, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 28 checking index 3, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 29 checking index 3, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 30 checking index 3, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 31 checking index 3, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 32 checking index 4, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 33 checking index 4, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 34 checking index 4, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 35 checking index 4, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 36 checking index 4, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 37 checking index 4, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 38 checking index 4, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 39 checking index 4, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 40 checking index 5, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 41 checking index 5, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 42 checking index 5, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 43 checking index 5, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 44 checking index 5, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 45 checking index 5, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 46 checking index 5, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 47 checking index 5, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Plid: set
+DBG$ 48 l_handle_kill> pid 48, owns lid 48, release it
+DBG$ 48 l_unlock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 48 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Release: set
+DBG$ 48 l_unlock> pid 48 unlocked write lid 48
+DBG$ 48 l_unlock> no more waiters for lid 48
+DBG$ 48 l_unlock> lid 48 state changed from Write to Free
+DBG$ 48 l_unlock> lock dec'd for pid 48, total # of locks 1
+DBG$ 48 l_unlock> end
+DBG$ 48 l_handle_kill> pid 48 released lid 48
+DBG$ 48 l_reset_prio> start
+DBG$ 48 l_pidmap_oper> lid 0 checking index 0, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 1 checking index 0, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 2 checking index 0, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 3 checking index 0, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 4 checking index 0, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 5 checking index 0, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 6 checking index 0, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 7 checking index 0, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 8 checking index 1, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 9 checking index 1, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 10 checking index 1, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 11 checking index 1, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 12 checking index 1, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 13 checking index 1, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 14 checking index 1, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 15 checking index 1, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 16 checking index 2, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 17 checking index 2, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 18 checking index 2, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 19 checking index 2, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 20 checking index 2, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 21 checking index 2, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 22 checking index 2, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 23 checking index 2, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 24 checking index 3, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 25 checking index 3, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 26 checking index 3, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 27 checking index 3, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 28 checking index 3, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 29 checking index 3, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 30 checking index 3, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 31 checking index 3, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 32 checking index 4, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 33 checking index 4, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 34 checking index 4, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 35 checking index 4, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 36 checking index 4, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 37 checking index 4, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 38 checking index 4, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 39 checking index 4, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 40 checking index 5, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 41 checking index 5, bit 1 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 42 checking index 5, bit 2 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 43 checking index 5, bit 3 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 44 checking index 5, bit 4 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 45 checking index 5, bit 5 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 46 checking index 5, bit 6 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 47 checking index 5, bit 7 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 48 checking index 6, bit 0 of type Plid: unset
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 1 of type Plid: set
+DBG$ 48 l_reset_prio> pid 48, prio changed from 30 to 30
+DBG$ 48 l_reset_prio> end
+DBG$ 48 l_handle_kill> pid 48, lid 48, priority resetted after due to kill
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 1 of type Plid: set
+DBG$ 48 l_handle_kill> pid 48, owns lid 49, release it
+DBG$ 48 l_unlock> start
+DBG$ 48 l_is_lid_stale_for_pid> start
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Delete: unset
+DBG$ 48 l_is_lid_stale_for_pid> lid 49 is not stale for pid 48
+DBG$ 48 l_is_lid_stale_for_pid> end
+DBG$ 48 l_pidmap_oper> lid 49 checking index 6, bit 0 of type Release: set
+DBG$ 48 l_unlock> pid 48 unlocked read lid 49
+DBG$ 48 l_get_next_writer> start
+DBG$ 48 l_get_next_writer> lid 48 state changed from Read to Write
+DBG$ 48 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Release
+DBG$ 48 l_get_next_writer> lid 49 next writer lock for pid 46
+DBG$ 48 l_recal_next> start
+DBG$ 48 l_recal_next> nwread = nwwrite = 0!
+DBG$ 48 l_recal_next> wait list is empty
+DBG$ 48 l_recal_next> end
+DBG$ 48 l_get_next_writer> end
+DBG$ 48 l_unlock> lock dec'd for pid 48, total # of locks 0
+DBG$ 48 l_unlock> end
+DBG$ 48 l_handle_kill> pid 48 released lid 49
+DBG$ 48 l_reset_prio> start
+DBG$ 48 l_reset_prio> pid 48 has released all its locks.. resetting its priority
+DBG$ 48 l_reset_prio> pid 48 prio changed from 30 to 25
+DBG$ 48 l_reset_prio> end
+DBG$ 48 l_handle_kill> pid 48, lid 49, priority resetted after due to kill
+DBG$ 48 l_remove_pid> start
+DBG$ 48 l_remove_pid> pid 48, not currently waiting on any lid
+DBG$ 48 l_remove_pid> end
+DBG$ 48 l_handle_kill> pid 4 removed from waitlist
+DBG$ 48 l_handle_kill> end
+DBG$ 48 l_clear_pidmaps> start
+DBG$ 48 l_clear_pidmaps> end
+DBG$ 46 lock> setting the logmap bit for lid 49 after resched...
+DBG$ 46 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Log
+DBG$ 46 lock> lock inc'd for pid 46, total # of locks 1
+DBG$ 46 l_pidmap_oper> lid 49 setting index 5, bit 6 of type Release
+DBG$ 46 lock> pid 46, setting the plidmap bit for lid 49 after resched...
+DBG$ 46 l_pidmap_oper> lid 49 setting index 6, bit 1 of type Plid
+
+	procC: acquired write lock l1
+
+******** Lock Details Start ********
+LID                       : 49
+Lock state                : Write
+# of active readers       : 0
+# of active writers       : 1
+# of waiting readers      : 0
+# of waiting writers      : 0
+Waiting readers on LID 49 : 
+Waiting writers on LID 49 : 
+Next PID                  : -1
+Next queue                : Log
+HPid                      : 46
+HPrio                     : 30
+******** Lock Details End *********
+
+
+
+	procA: priority -1 after lock
+	procB: priority 20 after lock
+	procC: priority 30 after lock
+
+
+DBG$ 46 procC> procC going to sleep
+DBG$ 47 l_handle_kill> start
+DBG$ 47 l_handle_kill> pid 47 doesn't have any locks
+DBG$ 47 l_handle_kill> end
+DBG$ 47 l_clear_pidmaps> start
+DBG$ 47 l_clear_pidmaps> end
+DBG$ 46 procC> procC back from sleep
+
+
+	procA: priority -1 before release
+	procB: priority -1 before release
+	procC: priority 30 before release
+
+
+DBG$ 46 releaseall> start
+
+
+
+DAN: releasing lid 49
+
+
+DBG$ 46 l_unlock> start
+DBG$ 46 l_is_lid_stale_for_pid> start
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Delete: unset
+DBG$ 46 l_is_lid_stale_for_pid> lid 49 is not stale for pid 46
+DBG$ 46 l_is_lid_stale_for_pid> end
+DBG$ 46 l_pidmap_oper> lid 49 checking index 5, bit 6 of type Release: set
+DBG$ 46 l_unlock> pid 46 unlocked write lid 49
+DBG$ 46 l_unlock> no more waiters for lid 49
+DBG$ 46 l_unlock> lid 49 state changed from Write to Free
+DBG$ 46 l_unlock> lock dec'd for pid 46, total # of locks 0
+DBG$ 46 l_unlock> end
+DBG$ 46 l_reset_prio> start
+DBG$ 46 l_reset_prio> pid 46 is currently using it's original priority
+DBG$ 46 l_reset_prio> end
+DBG$ 46 releaseall> end
+
+	procC: released l1
+
+
+	procA: priority -1 after release
+	procB: priority -1 after release
+	procC: priority 30 after release
+
+
+
+
+			procC is dead
+
+DBG$ 46 procC> end
+DBG$ 46 l_handle_kill> start
+DBG$ 46 l_handle_kill> pid 46 doesn't have any locks
+DBG$ 46 l_handle_kill> end
+DBG$ 46 l_clear_pidmaps> start
+DBG$ 46 l_clear_pidmaps> end
+main is dead
+
+
+All user processes have completed.
+
+DBG$ 49 l_handle_kill> start
+DBG$ 49 l_handle_kill> pid 49 doesn't have any locks
+DBG$ 49 l_handle_kill> end
+DBG$ 49 l_clear_pidmaps> start
+DBG$ 49 l_clear_pidmaps> end
+
+

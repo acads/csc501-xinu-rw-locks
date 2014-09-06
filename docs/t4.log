@@ -1,0 +1,196 @@
+DBG$ 0 sysinit> start
+pcibios_init : PCI BIOS revision 2.10 entry at 0xfd9a0
+pci_init: PCI BIOS initialization succeeded
+DBG$ 0 linit> start
+DBG$ 0 linit> end
+DBG$ 0 sysinit> end
+
+
+Xinu Version (CSC501 1-2009 base) #10 (adhanas@bn17-47.dcs.mcnc.org) Sun Feb 9 15:33:10 EST 2014
+
+16777216 bytes real mem
+80859 bytes Xinu code
+clock enabled
+DBG$ 49 main> start
+
+
+Hello World, Xinu lives
+
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> returning lock 49
+DBG$ 49 l_new_lid> end
+DBG$ 49 l_init_lid> start
+DBG$ 49 l_init_lid> end
+DBG$ 49 lcreate> new lock 49 created
+DBG$ 49 lcreate> end
+DBG$ 49 lcreate> start
+DBG$ 49 l_new_lid> start
+DBG$ 49 l_new_lid> returning lock 48
+DBG$ 49 l_new_lid> end
+DBG$ 49 l_init_lid> start
+DBG$ 49 l_init_lid> end
+DBG$ 49 lcreate> new lock 48 created
+DBG$ 49 lcreate> end
+DBG$ 48 lock> start
+DBG$ 48 lock> lid 49 is free, pid 48 has read access now
+DBG$ 48 l_pidmap_oper> start
+pidmap: 0
+DBG$ 48 l_pidmap_oper> setting index 6, bit 0 of type release
+pidmap: 1
+DBG$ 48 l_pidmap_oper> end
+
+*** Lock Details Start ***
+Lock ID: 49
+Lock state: Read
+# of active readers: 1
+# of active writers: 0
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 49: 
+Head: 352, Tail: 353, PID: 
+Waiting writers on lock 49: 
+Head: 452, Tail: 453, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+DBG$ 48 lock> end
+DBG$ 47 lock> start
+DBG$ 47 lock> lid 48 is free, pid 47 has wirte access now
+DBG$ 47 l_pidmap_oper> start
+pidmap: 0
+DBG$ 47 l_pidmap_oper> setting index 5, bit 7 of type release
+pidmap: 128
+DBG$ 47 l_pidmap_oper> end
+
+*** Lock Details Start ***
+Lock ID: 48
+Lock state: Write
+# of active readers: 0
+# of active writers: 1
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 48: 
+Head: 350, Tail: 351, PID: 
+Waiting writers on lock 48: 
+Head: 450, Tail: 451, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+DBG$ 47 lock> end
+
+*** Lock Details Start ***
+Lock ID: 49
+Lock state: Read
+# of active readers: 1
+# of active writers: 0
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 49: 
+Head: 352, Tail: 353, PID: 
+Waiting writers on lock 49: 
+Head: 452, Tail: 453, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+
+*** Lock Details Start ***
+Lock ID: 48
+Lock state: Write
+# of active readers: 0
+# of active writers: 1
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 48: 
+Head: 350, Tail: 351, PID: 
+Waiting writers on lock 48: 
+Head: 450, Tail: 451, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+
+*** Process Details Start ***
+PID: 49
+Process State: Current
+Process waiting on lock: 0
+Process wait start time: 0
+*** Process Details End ***
+
+DBG$ 48 releaseall> start
+DBG$ 48 lunlock> start
+DBG$ 48 l_pidmap_oper> start
+pidmap: 1
+ret_val: 1
+DBG$ 48 l_pidmap_oper> checking index 6, bit 0 of type release> set
+DBG$ 48 l_pidmap_oper> end
+DBG$ 48 lunlock> pid 48 unlocked read lid 49
+DBG$ 48 lunlock> end
+DBG$ 48 releaseall> end
+DBG$ 47 releaseall> start
+DBG$ 47 lunlock> start
+DBG$ 47 l_pidmap_oper> start
+pidmap: 128
+ret_val: 1
+DBG$ 47 l_pidmap_oper> checking index 5, bit 7 of type release> set
+DBG$ 47 l_pidmap_oper> end
+DBG$ 47 lunlock> pid 47 unlocked write lid 48
+DBG$ 47 lunlock> end
+DBG$ 47 releaseall> end
+
+*** Process Details Start ***
+PID: 48
+Process State: Free
+Process waiting on lock: 0
+Process wait start time: 0
+*** Process Details End ***
+
+
+*** Process Details Start ***
+PID: 47
+Process State: Free
+Process waiting on lock: 0
+Process wait start time: 0
+*** Process Details End ***
+
+
+*** Lock Details Start ***
+Lock ID: 49
+Lock state: Read
+# of active readers: 0
+# of active writers: 0
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 49: 
+Head: 352, Tail: 353, PID: 
+Waiting writers on lock 49: 
+Head: 452, Tail: 453, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+
+*** Lock Details Start ***
+Lock ID: 48
+Lock state: Write
+# of active readers: 0
+# of active writers: 0
+# of waiting readers: 0
+# of waiting writers: 0
+Waiting readers on lock 48: 
+Head: 350, Tail: 351, PID: 
+Waiting writers on lock 48: 
+Head: 450, Tail: 451, PID: 
+Next PID: 0
+Next queue: Read
+*** Lock Details End ***
+
+DBG$ 49 main> end
+
+
+All user processes have completed.
+
+
